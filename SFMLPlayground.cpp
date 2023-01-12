@@ -17,8 +17,6 @@ int main()
    while ( window->isOpen() )
    {
       Event e;
-      auto dx = 0.0f;
-      auto strafeAngle = 0.0f;
 
       while ( window->pollEvent( e ) )
       {
