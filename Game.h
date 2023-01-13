@@ -43,6 +43,8 @@ namespace Playground
       std::vector<Sector> _sectors;
       std::shared_ptr<BspTree> _bspTree;
       sf::Vertex _renderColumns[SCREEN_WIDTH * 2];
+      sf::Vertex _ceilingRenderRect[4];
+      sf::Vertex _floorRenderRect[4];
 
       sf::Vector2f _playerPosition;
       float _playerMoveIncrement;

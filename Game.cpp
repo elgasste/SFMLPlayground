@@ -43,6 +43,16 @@ Game::Game() :
    _sectors[2].linedefs.push_back( { Vector2f( 120, 80 ), Vector2f( 100, 60 ), Color::Green } );
 
    _bspTree = shared_ptr<BspTree>( new BspTree( _sectors ) );
+
+   _ceilingRenderRect[0] = Vertex( Vector2f( 0, 0 ), Color( 128, 128, 128 ) );
+   _ceilingRenderRect[1] = Vertex( Vector2f( SCREEN_WIDTH, 0 ), Color( 128, 128, 128 ) );
+   _ceilingRenderRect[2] = Vertex( Vector2f( SCREEN_WIDTH, SCREEN_HEIGHT / 2.0f ), Color::Black );
+   _ceilingRenderRect[3] = Vertex( Vector2f( 0, SCREEN_HEIGHT / 2.0f ), Color::Black );
+
+   _floorRenderRect[0] = Vertex( Vector2f( 0, SCREEN_HEIGHT / 2.0f ), Color::Black );
+   _floorRenderRect[1] = Vertex( Vector2f( SCREEN_WIDTH, SCREEN_HEIGHT / 2.0f ), Color::Black );
+   _floorRenderRect[2] = Vertex( Vector2f( SCREEN_WIDTH, SCREEN_HEIGHT ), Color( 128, 128, 128 ) );
+   _floorRenderRect[3] = Vertex( Vector2f( 0, SCREEN_HEIGHT ), Color( 128, 128, 128 ) );
 }
 
 void Game::MoveForward()
@@ -108,6 +118,9 @@ void Game::Render( const shared_ptr<RenderWindow> window )
    float angle = _playerAngle + RAD_30;
    Vector2f intersectionPoint;
    Linedef intersectingLinedef;
+
+   window->draw( _ceilingRenderRect, 4, Quads );
+   window->draw( _floorRenderRect, 4, Quads );
 
    for ( int i = 0; i < SCREEN_WIDTH; i++, angle -= _rayAngleIncrement )
    {
