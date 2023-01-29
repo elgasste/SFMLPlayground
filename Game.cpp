@@ -7,10 +7,10 @@ using namespace sf;
 using namespace Playground;
 
 Game::Game() :
-   _playerPosition( Vector2f( 30, 170 ) ), // sub-sector 6
-   _playerMoveIncrement( 2.0f ),
+   _playerPosition( Vector2f( 30, 170 ) ), // sub-sector 1
+   _playerMoveIncrement( 1.2f ),
    _playerAngle( RAD_45 ),
-   _playerTurnIncrement( RAD_45 / 15.0f ),
+   _playerTurnIncrement( RAD_45 / 30.0f ),
    _rayAngleIncrement( ( RAD_30 * 2 ) / SCREEN_WIDTH ),
    _wallHeight( 100.0f ),
    _projectionPlaneDelta( SCREEN_HEIGHT / 1.5f ),
