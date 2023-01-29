@@ -7,40 +7,82 @@ using namespace sf;
 using namespace Playground;
 
 Game::Game() :
-   _playerPosition( Vector2f( 20, 105 ) ), // sub-sector 6
-   _playerMoveIncrement( 2.0f ),
+   _playerPosition( Vector2f( 30, 170 ) ), // sub-sector 1
+   _playerMoveIncrement( 1.2f ),
    _playerAngle( RAD_45 ),
-   _playerTurnIncrement( RAD_45 / 15.0f ),
+   _playerTurnIncrement( RAD_45 / 30.0f ),
    _rayAngleIncrement( ( RAD_30 * 2 ) / SCREEN_WIDTH ),
    _wallHeight( 100.0f ),
-   _projectionPlaneDelta( SCREEN_HEIGHT / 2.0f ),
+   _projectionPlaneDelta( SCREEN_HEIGHT / 1.5f ),
    _lightingScalar( 2.0f )
 {
    // TODO: try textured walls
 
-   // outer-most sector
+   // outer sector (blue)
    _sectors.push_back( Sector() );
-   _sectors[0].linedefs.push_back( { Vector2f( 0, 0 ), Vector2f( 200, 0 ), Color::Blue } );
-   _sectors[0].linedefs.push_back( { Vector2f( 200, 0 ), Vector2f( 200, 120 ), Color::Blue } );
-   _sectors[0].linedefs.push_back( { Vector2f( 200, 120 ), Vector2f( 0, 120 ), Color::Blue } );
-   _sectors[0].linedefs.push_back( { Vector2f( 0, 120 ), Vector2f( 0, 60 ), Color::Blue } );
-   _sectors[0].linedefs.push_back( { Vector2f( 0, 60 ), Vector2f( 60, 60 ), Color::Blue } );
-   _sectors[0].linedefs.push_back( { Vector2f( 60, 60 ), Vector2f( 0, 40 ), Color::Blue } );
-   _sectors[0].linedefs.push_back( { Vector2f( 0, 40 ), Vector2f( 0, 0 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 40, 0 ), Vector2f( 300, 0 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 300, 0 ), Vector2f( 300, 140.0f + ( 20.0f / 3.0f ) ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 300, 140.0f + ( 20.0f / 3.0f ) ), Vector2f( 260, 130.0f + ( 10.0f / 3.0f ) ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 260, 130.0f + ( 10.0f / 3.0f ) ), Vector2f( 260, 180 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 260, 180 ), Vector2f( 300, 200 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 300, 200 ), Vector2f( 300, 250 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 300, 250 ), Vector2f( 260, 290 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 260, 290 ), Vector2f( 90, 290 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 90, 290 ), Vector2f( 90, 230 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 90, 230 ), Vector2f( 70, 210 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 70, 210 ), Vector2f( 60, 210 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 60, 210 ), Vector2f( 60, 290 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 60, 290 ), Vector2f( 0, 290 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 0, 290 ), Vector2f( 0, 40 ), Color::Blue } );
+   _sectors[0].linedefs.push_back( { Vector2f( 0, 40 ), Vector2f( 40, 0 ), Color::Blue } );
 
-   // straight column sector
+   // inner sector 1 (red)
    _sectors.push_back( Sector() );
-   _sectors[1].linedefs.push_back( { Vector2f( 140, 20 ), Vector2f( 140, 40 ), Color::Red } );
-   _sectors[1].linedefs.push_back( { Vector2f( 140, 40 ), Vector2f( 160, 40 ), Color::Red } );
-   _sectors[1].linedefs.push_back( { Vector2f( 160, 40 ), Vector2f( 160, 20 ), Color::Red } );
-   _sectors[1].linedefs.push_back( { Vector2f( 160, 20 ), Vector2f( 140, 20 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 110, 60 ), Vector2f( 100, 60 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 100, 60 ), Vector2f( 100, 80 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 100, 80 ), Vector2f( 50, 80 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 50, 80 ), Vector2f( 20, 110 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 20, 110 ), Vector2f( 30, 120 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 30, 120 ), Vector2f( 60, 90 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 60, 90 ), Vector2f( 85, 90 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 85, 90 ), Vector2f( 85, 130 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 85, 130 ), Vector2f( 95, 130 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 95, 130 ), Vector2f( 95, 90 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 95, 90 ), Vector2f( 110, 90 ), Color::Red } );
+   _sectors[1].linedefs.push_back( { Vector2f( 110, 90 ), Vector2f( 110, 60 ), Color::Red } );
 
-   // diagonal column sector
+   // inner sector 2 (green)
    _sectors.push_back( Sector() );
-   _sectors[2].linedefs.push_back( { Vector2f( 100, 60 ), Vector2f( 80, 80 ), Color::Green } );
-   _sectors[2].linedefs.push_back( { Vector2f( 80, 80 ), Vector2f( 100, 100 ), Color::Green } );
-   _sectors[2].linedefs.push_back( { Vector2f( 100, 100 ), Vector2f( 120, 80 ), Color::Green } );
-   _sectors[2].linedefs.push_back( { Vector2f( 120, 80 ), Vector2f( 100, 60 ), Color::Green } );
+   _sectors[2].linedefs.push_back( { Vector2f( 230, 60 ), Vector2f( 170, 60 ), Color::Green } );
+   _sectors[2].linedefs.push_back( { Vector2f( 170, 60 ), Vector2f( 170, 70 ), Color::Green } );
+   _sectors[2].linedefs.push_back( { Vector2f( 170, 70 ), Vector2f( 230, 70 ), Color::Green } );
+   _sectors[2].linedefs.push_back( { Vector2f( 230, 70 ), Vector2f( 230, 60 ), Color::Green } );
+
+   // inner sector 3 (magenta)
+   _sectors.push_back( Sector() );
+   _sectors[3].linedefs.push_back( { Vector2f( 260, 20 ), Vector2f( 250, 30 ), Color::Magenta } );
+   _sectors[3].linedefs.push_back( { Vector2f( 250, 30 ), Vector2f( 260, 40 ), Color::Magenta } );
+   _sectors[3].linedefs.push_back( { Vector2f( 260, 40 ), Vector2f( 270, 30 ), Color::Magenta } );
+   _sectors[3].linedefs.push_back( { Vector2f( 270, 30 ), Vector2f( 260, 20 ), Color::Magenta } );
+
+   // inner sector 4 (yellow)
+   _sectors.push_back( Sector() );
+   _sectors[4].linedefs.push_back( { Vector2f( 220, 120 ), Vector2f( 190, 130 ), Color::Yellow } );
+   _sectors[4].linedefs.push_back( { Vector2f( 190, 130 ), Vector2f( 190, 140 ), Color::Yellow } );
+   _sectors[4].linedefs.push_back( { Vector2f( 190, 140 ), Vector2f( 250, 160 ), Color::Yellow } );
+   _sectors[4].linedefs.push_back( { Vector2f( 250, 160 ), Vector2f( 250, 130 ), Color::Yellow } );
+   _sectors[4].linedefs.push_back( { Vector2f( 250, 130 ), Vector2f( 220, 120 ), Color::Yellow } );
+
+   // inner sector 5 (cyan)
+   _sectors.push_back( Sector() );
+   _sectors[5].linedefs.push_back( { Vector2f( 175, 185 ), Vector2f( 165, 185 ), Color::Cyan } );
+   _sectors[5].linedefs.push_back( { Vector2f( 165, 185 ), Vector2f( 155, 195 ), Color::Cyan } );
+   _sectors[5].linedefs.push_back( { Vector2f( 155, 195 ), Vector2f( 155, 205 ), Color::Cyan } );
+   _sectors[5].linedefs.push_back( { Vector2f( 155, 205 ), Vector2f( 165, 215 ), Color::Cyan } );
+   _sectors[5].linedefs.push_back( { Vector2f( 165, 215 ), Vector2f( 175, 215 ), Color::Cyan } );
+   _sectors[5].linedefs.push_back( { Vector2f( 175, 215 ), Vector2f( 185, 205 ), Color::Cyan } );
+   _sectors[5].linedefs.push_back( { Vector2f( 185, 205 ), Vector2f( 185, 195 ), Color::Cyan } );
+   _sectors[5].linedefs.push_back( { Vector2f( 185, 195 ), Vector2f( 175, 185 ), Color::Cyan } );
 
    _bspTree = shared_ptr<BspTree>( new BspTree( _sectors ) );
 
