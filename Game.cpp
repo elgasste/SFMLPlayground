@@ -13,7 +13,7 @@ Game::Game() :
    _playerTurnIncrement( RAD_45 / 15.0f ),
    _rayAngleIncrement( ( RAD_30 * 2 ) / SCREEN_WIDTH ),
    _wallHeight( 100.0f ),
-   _projectionPlaneDelta( SCREEN_HEIGHT / 2.0f ),
+   _projectionPlaneDelta( SCREEN_HEIGHT / 1.5f ),
    _lightingScalar( 2.0f )
 {
    // TODO: try textured walls
